@@ -111,7 +111,7 @@ select title
 from cte 
 where director ILIKE '%Rajkumar Hirani%'
 
-with cte3 as ( --8.Increase/decrese in movie_count in netflix
+with cte3 as ( --8.Increase/decrese in movie_count in netflix by year
 with cte2 as ( 
 with cte as (  
 SELECT type,TO_CHAR(TO_DATE(date_added, 'Month DD, YYYY'), 'YYYY') AS years
