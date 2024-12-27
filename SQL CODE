@@ -110,3 +110,18 @@ where type = 'Movie')
 select title
 from cte 
 where director ILIKE '%Rajkumar Hirani%'
+
+with cte3 as ( --8.Increase/decrese in movie_count in netflix
+with cte2 as ( 
+with cte as (  
+SELECT type,TO_CHAR(TO_DATE(date_added, 'Month DD, YYYY'), 'YYYY') AS years
+FROM netflix
+where type = 'Movie')
+select years,count(years) as count_movie
+from cte
+group by years
+order by years desc)
+select *,lead(count_movie,1,count_movie) over(order by years desc) as privous_count,Round((count_movie-lead(count_movie,1,count_movie) over(order by years desc))*100.0/lead(count_movie,1,count_movie) over(order by years desc),2) as percentage_increase_decrease
+from cte2)
+select years,count_movie,privous_count,CONCAT(percentage_increase_decrease,'%') as percentage_increase_decrease
+from cte3
