@@ -125,3 +125,10 @@ select *,lead(count_movie,1,count_movie) over(order by years desc) as privous_co
 from cte2)
 select years,count_movie,privous_count,CONCAT(percentage_increase_decrease,'%') as percentage_increase_decrease
 from cte3
+
+select type,release_year,count(release_year) --Top 5 year release by movie
+from netflix
+group by type,release_year
+having type = 'Movie'
+order by count(release_year) desc
+LIMIT 5
