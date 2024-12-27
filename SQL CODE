@@ -70,7 +70,6 @@ select *
 from cte
 where CAST(SUBSTRING(duration FROM '^[0-9]+') as INT) > 5
 
-
 with cte2 as ( --4.Find the most common rating for movies and TV shows
 with cte as (
 select type,rating,count(rating) as rating_count
@@ -78,7 +77,28 @@ from netflix
 group by type,rating)
 select *,row_number() over(partition by type order by rating_count desc) as rn
 from cte)
-
 select type,rating as most_frequent_rating
 from cte2
 where rn = 1
+
+/*5.Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
+the description field. Label content containing these keywords as 'Bad' and all other 
+content as 'Good'. Count how many items fall into each category.*/
+
+with cte as (
+select type,case when description LIKE '%kill%' or description LIKE '%violence%' then 'Bad'
+            else 'Good'
+	   End as Category
+from netflix)
+select *,count(Category) as Category_count
+from cte
+group by type,Category
+order by Category_count desc
+
+with cte as ( -- 6. List all movies that are documentaries
+select type,title,listed_in
+from netflix
+where type = 'Movie')
+select title
+from cte 
+where listed_in LIKE '%Documentaries%'
