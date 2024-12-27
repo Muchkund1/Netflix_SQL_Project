@@ -101,4 +101,12 @@ from netflix
 where type = 'Movie')
 select title
 from cte 
-where listed_in LIKE '%Documentaries%'
+where listed_in ILIKE '%Documentaries%'
+
+with cte as ( -- 7. Find all the movies director by 'Rajkumar Hirani'!
+select type,title,director
+from netflix
+where type = 'Movie')
+select title
+from cte 
+where director ILIKE '%Rajkumar Hirani%'
