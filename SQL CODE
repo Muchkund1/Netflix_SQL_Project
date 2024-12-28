@@ -20,7 +20,7 @@ select * from netflix
 select count(*) as total_count
 from netflix
 
-------------------data cleaning-------------------------------------------------------------------
+------------------data cleaning--------------------------------------------------------------------------------------------------------------------------------------
 with cte as (
 select *,row_number() over(partition by show_id,type,title,director,casts,country,date_added,release_year,rating,duration,listed_in,description) as rn
 from netflix) --no repeat data 
@@ -52,7 +52,7 @@ UPDATE netflix --, South Korea replace , and space
 SET country = REPLACE(country, ', ', '')
 WHERE country = ', South Korea'
 
--------------------------EDA------------------------------------------------------------------------
+-------------------------EDA------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 select type,count(type) as Count_Movie  -- 1. Count the number of Movies vs TV Shows
 from netflix
@@ -143,3 +143,19 @@ LIMIT 5
 select * --11. List all movies released in a specific year (e.g., 2020)
 from netflix
 where release_year = 2020 and type = 'Movie'
+
+Select * --12. Find all content without a director
+from netflix
+where director is null
+
+select * -- 13. Identify the longest movie
+from netflix
+where type = 'Movie'
+order by CAST(SUBSTRING(duration FROM '^[0-9]+') as INT) desc 
+/*Duration column contains string values like ex= "74 min" that cannot be directly cast to integers without first extracting the numeric part. 
+  To handle this, we need to extract the numeric portion correctly and then cast it.*/
+
+select UNNEST(STRING_TO_ARRAY(listed_in, ',')),count(listed_in) -- 14. Count the number of content items in each genre
+from netflix
+group by UNNEST(STRING_TO_ARRAY(listed_in, ','))
+
