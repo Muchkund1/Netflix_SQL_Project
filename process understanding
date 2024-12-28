@@ -1,0 +1,10 @@
+Step 1: Check the pattern ^[0-9]+
+The pattern ^[0-9]+ does two things:
+
+^ checks if the numbers are at the beginning of the string.
+[0-9]+ matches one or more digits (like 126 in 126 hours).
+So, it looks at the duration string, for example: "126 hours", and finds that 126 matches because it is at the start of the string.
+
+Step 2: SUBSTRING extracts the matched part
+Once the pattern ^[0-9]+ matches the numbers at the start of the string, SUBSTRING(duration FROM '^[0-9]+') takes that matched part (126) and returns it.
+
