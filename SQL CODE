@@ -126,9 +126,20 @@ from cte2)
 select years,count_movie,privous_count,CONCAT(percentage_increase_decrease,'%') as percentage_increase_decrease
 from cte3
 
-select type,release_year,count(release_year) --Top 5 year release by movie
+select type,release_year,count(release_year) as Movie_Count --9.Top 5 year release by movie
 from netflix
 group by type,release_year
 having type = 'Movie'
 order by count(release_year) desc
 LIMIT 5
+
+select type,release_year,count(release_year) as TV_Show_Count --10.Top 5 year release by TV Show
+from netflix
+group by type,release_year
+having type = 'TV Show'
+order by count(release_year) desc
+LIMIT 5
+
+select * --11. List all movies released in a specific year (e.g., 2020)
+from netflix
+where release_year = 2020 and type = 'Movie'
