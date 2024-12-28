@@ -152,6 +152,7 @@ select * -- 13. Identify the longest movie
 from netflix
 where type = 'Movie'
 order by CAST(SUBSTRING(duration FROM '^[0-9]+') as INT) desc 
+LIMIT 1
 /*if you apply order by duration so order by not work properly*/
 /*Duration column contains string values like ex= "74 min" that cannot be directly cast to integers without first extracting the numeric part. 
   To handle this, we need to extract the numeric portion correctly and then cast it.*/
@@ -163,5 +164,6 @@ group by UNNEST(STRING_TO_ARRAY(listed_in, ','))
  This function is useful when you have a string with multiple elements separated by a delimiter (like a comma) and you want to process each element separately.*/
 /*UNNEST is a function in PostgreSQL that expands an array into a set of rows.*/
 
--- 15. Find each year and the average numbers of content release in India on netflix. 
--- return top 5 year with highest avg content release !
+select title --15.Find content added in the last 5 years
+from netflix
+where TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE- INTERVAL '5 years'
