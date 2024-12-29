@@ -15,7 +15,7 @@ director = Name of the director
 
 Cast = Casting in Movie or TV Show
 
-Country = Content release in which Country
+Country = Country where the movie / show was produced
 
 date_added = Movie or TV Show added when in Netflix
 
