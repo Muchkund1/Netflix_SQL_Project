@@ -5,24 +5,24 @@ This project involves a comprehensive analysis of Netflix's movies and TV shows 
 
 The data for this project is sourced from the Kaggle dataset: [Movies Dataset](https://www.kaggle.com/datasets/shivamb/netflix-shows?resource=download)
 
-show_id = id of the show
+show_id = Unique ID for every Movie / Tv Show
 
-type = type of content
+type = Identifier - A Movie or TV Show
 
-title = Movie title or TV Show title
+title = Title of the Movie / Tv Show
 
-director = Name of the director
+director = Director of the Movie
 
-Cast = Casting in Movie or TV Show
+Cast = Actors involved in the movie / show
 
 Country = Country where the movie / show was produced
 
-date_added = Movie or TV Show added when in Netflix
+date_added = Date it was added on Netflix
 
-release_year = release year of Movie or TV Show
+release_year = Actual Release year of the move / show
 
 duration = Duration of Movie in min / Season of TV Show
 
-listed_in = Genre of Movie or TV Show
+listed_in = TV Rating of the movie / show
 
-description = Description about Movie or TV Show
+description = Total Duration - in minutes or number of seasons
