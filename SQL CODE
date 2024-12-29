@@ -176,3 +176,19 @@ select title,casts
 from cte
 where release_year >= EXTRACT(YEAR FROM CURRENT_DATE - INTERVAL '10 years')
 
+-- 17. Find the top 10 actors who have appeared in the highest number of movies produced in India.
+select UNNEST(STRING_TO_ARRAY(casts, ',')) as Actor,count(title) as total_count
+from netflix
+group by UNNEST(STRING_TO_ARRAY(casts, ',')),type,country
+having type = 'Movie' and country = 'India'
+order by count(title) desc
+LIMIT 10
+
+select UNNEST(STRING_TO_ARRAY(country, ',')) as country, count(title)-- 18. Find the top 5 countries with the most content on Netflix
+from netflix
+group by UNNEST(STRING_TO_ARRAY(country, ','))
+order by count(title) desc
+LIMIT 5
+
+-- 19. Find each year and the average numbers of content release by India on netflix. 
+-- return top 5 year with highest avg content release !
