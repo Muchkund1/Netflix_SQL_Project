@@ -60,7 +60,7 @@ group by type
 
 select * -- 2. List all movies released in a specific year
 from netflix
-where release_year = 2021
+where release_year = 2021 and type = 'Movie'
 
 with cte as ( --3.List all TV shows with more than 5 seasons
 select * 
@@ -140,9 +140,9 @@ having type = 'TV Show'
 order by count(release_year) desc
 LIMIT 5
 
-select * --11. List all movies released in a specific year (e.g., 2020)
+select * --11. List all TV Show released in a specific year (e.g., 2020)
 from netflix
-where release_year = 2020 and type = 'Movie'
+where release_year = 2020 and type = 'TV Show'
 
 Select * --12. Find all content without a director
 from netflix
