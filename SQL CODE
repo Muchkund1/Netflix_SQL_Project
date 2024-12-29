@@ -167,3 +167,12 @@ group by UNNEST(STRING_TO_ARRAY(listed_in, ','))
 select title --15.Find content added in the last 5 years
 from netflix
 where TO_DATE(date_added,'Month DD, YYYY') >= CURRENT_DATE- INTERVAL '5 years'
+
+with cte as ( -- 16. Find how many movies actor 'Salman Khan' appeared in last 10 years!
+select title,casts,release_year
+from netflix
+where type = 'Movie' and casts ILIKE '%Salman Khan%')
+select title,casts
+from cte
+where release_year >= EXTRACT(YEAR FROM CURRENT_DATE - INTERVAL '10 years')
+
